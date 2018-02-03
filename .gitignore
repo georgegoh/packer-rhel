@@ -1,0 +1,4 @@
+prepare
+/packer_cache/*
+/img*
+/iso/*.iso

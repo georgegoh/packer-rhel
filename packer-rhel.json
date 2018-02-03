@@ -1,0 +1,62 @@
+{
+  "builders":
+  [
+    {
+      "type": "qemu",
+      "qemuargs": [
+        [ "-m", "1024M" ]
+      ],
+      "accelerator": "kvm",
+      "iso_url": "iso/rhel-server-7.4-update-4-x86_64-dvd.iso",
+      "iso_checksum": "fb606f3f14ac2367aefabbe9a221b57c",
+      "iso_checksum_type": "md5",
+      "output_directory": "img-qemu",
+      "shutdown_command": "shutdown -P now",
+      "disk_size": 256000,
+      "format": "qcow2",
+      "headless": false,
+      "http_directory": "httpdir",
+      "http_port_min": 10082,
+      "http_port_max": 10089,
+      "ssh_host_port_min": 2222,
+      "ssh_host_port_max": 2229,
+      "ssh_username": "root",
+      "ssh_password": "redhat",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "300s",
+      "vm_name": "worker",
+      "net_device": "virtio-net",
+      "disk_interface": "virtio",
+      "boot_wait": "3s",
+      "boot_command": [
+        "<up><tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/rhel7-ks.cfg<enter><wait>"
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "iso_url": "iso/rhel-server-7.4-update-4-x86_64-dvd.iso",
+      "iso_checksum": "fb606f3f14ac2367aefabbe9a221b57c",
+      "iso_checksum_type": "md5",
+      "output_directory": "img-vmware",
+      "shutdown_command": "shutdown -P now",
+      "disk_size": 256000,
+      "format": "ova",
+      "headless": false,
+      "http_directory": "httpdir",
+      "http_port_min": 10082,
+      "http_port_max": 10089,
+      "ssh_username": "root",
+      "ssh_password": "redhat",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "480s",
+      "vm_name": "worker",
+      "vmx_data": {
+        "memsize": "2048"
+      },
+      "boot_wait": "3s",
+      "boot_command": [
+        "<up><tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ocp-worker-rhel7-ks.cfg<enter><wait>"
+      ]
+    }
+  ]
+}

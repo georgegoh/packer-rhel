@@ -1,0 +1,6 @@
+1. Download and place a RHEL iso in the iso directory.
+2. Update the md5sum.
+3. Build using packer:
+   - for qemu only: packer build --only=qemu packer-rhel.json
+   - for vmware only: packer build --only=vmware-iso packer-rhel.json
+   - for both: packer build packer-rhel.json
